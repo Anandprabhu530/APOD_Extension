@@ -5,9 +5,7 @@ const data = async () => {
     "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY"
   ).then((response) => response.json());
   console.log(res);
-
-  let ele = document.getElementById("image_back");
-  ele.src = res.url;
+  document.body.style.backgroundImage = `url(${res.hdurl})`;
 };
 
 data();
