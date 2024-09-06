@@ -1,0 +1,7 @@
+{
+  "manifest_version": 3,
+  "name": "APOD",
+  "version": "1.0.0",
+  "description": "Astronomy Picture of the Day from NASA for your tab",
+  "author": "Anandprabhu530@gmail.com"
+}
