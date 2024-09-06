@@ -3,5 +3,20 @@
   "name": "APOD",
   "version": "1.0.0",
   "description": "Astronomy Picture of the Day from NASA for your tab",
-  "author": "Anandprabhu530@gmail.com"
+  "author": "Anandprabhu530@gmail.com",
+  "content_scripts": [
+    {
+      "js": ["scripts/content.js"],
+      "matches": [
+        "https://developer.chrome.com/docs/extensions/*",
+        "https://developer.chrome.com/docs/webstore/*"
+      ]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "index.html"
+  }
 }
