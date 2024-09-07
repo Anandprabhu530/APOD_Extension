@@ -59,6 +59,14 @@ const data = async () => {
     title: res.title,
     day: new Date(Date.now()).getDay(),
   };
+
+  //complete this
+  chrome.storage.local.set();
+
+  //bring back the try catch block
+  //demo key is enough for production since we fetch only for one time a day
+  //after that read from the chrome.storage
+  //see docs
 };
 
 data();
