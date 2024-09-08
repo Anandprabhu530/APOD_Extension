@@ -1,67 +1,69 @@
 console.log("Inside content");
 
 const data = async () => {
-  // try {
-  //   let prev_day = localStorage.getItem("Day");
-  //   if (prev_day) {
-  //     const data = JSON.parse(prev_day);
-  //     if (data.day === new Date(Date.now()).getDay()) {
-  //       console.log(document.body);
-  //       document.body.style.backgroundImage = `url(${data.hdurl})`;
+  try {
+    let prev_day = await chrome.storage.local.get("Day");
+    console.log(prev_day);
+    if (prev_day.Day) {
+      const data = JSON.parse(prev_day);
+      if (data.day === new Date(Date.now()).getDay()) {
+        console.log(document.body);
+        document.body.style.backgroundImage = `url(${data.hdurl})`;
 
-  //       let text_display = document.getElementById("text_detail");
-  //       console.log(text_display);
-  //       text_display.innerHTML = data.explanation;
+        let text_display = document.getElementById("text_detail");
+        console.log(text_display);
+        text_display.innerHTML = data.explanation;
 
-  //       let text_title = document.getElementById("text_title");
-  //       text_title.innerHTML = data.title;
-  //     }
-  //   } else {
-  //     const res = await fetch(
-  //       "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY"
-  //     ).then((response) => response.json());
-  //     console.log(res);
-  //     document.body.style.backgroundImage = `url(${res.hdurl})`;
+        let text_title = document.getElementById("text_title");
+        text_title.innerHTML = data.title;
+      }
+    } else {
+      const res = await fetch(
+        "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY"
+      ).then((response) => response.json());
+      console.log(res);
 
-  //     let text_display = document.getElementById("text_detail");
-  //     text_display.innerHTML = res.explanation;
+      document.body.style.backgroundImage = `url(${res.hdurl})`;
 
-  //     let text_title = document.getElementById("text_title");
-  //     text_title.innerHTML = res.title;
-  //     const Day = {
-  //       text_display: res.explanation,
-  //       hdurl: res.hdurl,
-  //       title: res.title,
-  //       day: new Date(Date.now()).getDay(),
-  //     };
-  //     localStorage.setItem("Day", JSON.stringify(Day));
-  //   }
-  // } catch (err) {
-  //   console.log(err);
-  // }
+      let text_display = document.getElementById("text_detail");
+      text_display.innerHTML = res.explanation;
+
+      let text_title = document.getElementById("text_title");
+      text_title.innerHTML = res.title;
+      const Day = {
+        text_display: res.explanation,
+        hdurl: res.hdurl,
+        title: res.title,
+        day: new Date(Date.now()).getDay(),
+      };
+      console.log(Day);
+      // chrome.storage.local.set({ Day: JSON.stringify(Day) });
+    }
+  } catch (err) {
+    console.log(err);
+  }
 
   // const res = await fetch(
   //   "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY"
   // ).then((response) => response.json());
 
-  const data = chrome.storage.local.get("Day");
-  const res = await JSON.parse(data);
+  // const data = chrome.storage.local.get("Day");
+  // const res = await JSON.parse(data);
 
-  document.body.style.backgroundImage = `url(${res.hdurl})`;
-  let text_display = document.getElementById("text_detail");
-  text_display.innerHTML = res.explanation;
+  // document.body.style.backgroundImage = `url(${res.hdurl})`;
+  // let text_display = document.getElementById("text_detail");
+  // text_display.innerHTML = res.explanation;
 
-  let text_title = document.getElementById("text_title");
-  text_title.innerHTML = res.title;
-  const Day = {
-    text_display: res.explanation,
-    hdurl: res.hdurl,
-    title: res.title,
-    day: new Date(Date.now()).getDay(),
-  };
+  // let text_title = document.getElementById("text_title");
+  // text_title.innerHTML = res.title;
+  // const Day = {
+  //   text_display: res.explanation,
+  //   hdurl: res.hdurl,
+  //   title: res.title,
+  //   day: new Date(Date.now()).getDay(),
+  // };
 
   //complete this
-  chrome.storage.local.set();
 
   //bring back the try catch block
   //demo key is enough for production since we fetch only for one time a day
